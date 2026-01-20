@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JurassicPark.Shared", "Jura
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JurassicPark.Api", "JurassicPark.Api\JurassicPark.Api.csproj", "{A8F2D3E1-5B7C-4A9E-B2D1-3C8E9F4A6D2B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JurassicPark.Mcp.Local", "JurassicPark.Mcp.Local\JurassicPark.Mcp.Local.csproj", "{C9B3E4F2-6C8D-5B0F-A3E2-4D9F5E6A7B8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JurassicPark.Mcp.Remote", "JurassicPark.Mcp.Remote\JurassicPark.Mcp.Remote.csproj", "{D0C4F5G3-7D9E-6C1G-B4F3-5E0G6F7B8C9D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +41,30 @@ Global
 		{A8F2D3E1-5B7C-4A9E-B2D1-3C8E9F4A6D2B}.Debug|x86.Build.0 = Debug|Any CPU
 		{A8F2D3E1-5B7C-4A9E-B2D1-3C8E9F4A6D2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8F2D3E1-5B7C-4A9E-B2D1-3C8E9F4A6D2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9B3E4F2-6C8D-5B0F-A3E2-4D9F5E6A7B8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9B3E4F2-6C8D-5B0F-A3E2-4D9F5E6A7B8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9B3E4F2-6C8D-5B0F-A3E2-4D9F5E6A7B8C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C9B3E4F2-6C8D-5B0F-A3E2-4D9F5E6A7B8C}.Debug|x64.Build.0 = Debug|Any CPU
+		{C9B3E4F2-6C8D-5B0F-A3E2-4D9F5E6A7B8C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C9B3E4F2-6C8D-5B0F-A3E2-4D9F5E6A7B8C}.Debug|x86.Build.0 = Debug|Any CPU
+		{C9B3E4F2-6C8D-5B0F-A3E2-4D9F5E6A7B8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9B3E4F2-6C8D-5B0F-A3E2-4D9F5E6A7B8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9B3E4F2-6C8D-5B0F-A3E2-4D9F5E6A7B8C}.Release|x64.ActiveCfg = Release|Any CPU
+		{C9B3E4F2-6C8D-5B0F-A3E2-4D9F5E6A7B8C}.Release|x64.Build.0 = Release|Any CPU
+		{C9B3E4F2-6C8D-5B0F-A3E2-4D9F5E6A7B8C}.Release|x86.ActiveCfg = Release|Any CPU
+		{C9B3E4F2-6C8D-5B0F-A3E2-4D9F5E6A7B8C}.Release|x86.Build.0 = Release|Any CPU
+		{D0C4F5G3-7D9E-6C1G-B4F3-5E0G6F7B8C9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0C4F5G3-7D9E-6C1G-B4F3-5E0G6F7B8C9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0C4F5G3-7D9E-6C1G-B4F3-5E0G6F7B8C9D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D0C4F5G3-7D9E-6C1G-B4F3-5E0G6F7B8C9D}.Debug|x64.Build.0 = Debug|Any CPU
+		{D0C4F5G3-7D9E-6C1G-B4F3-5E0G6F7B8C9D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D0C4F5G3-7D9E-6C1G-B4F3-5E0G6F7B8C9D}.Debug|x86.Build.0 = Debug|Any CPU
+		{D0C4F5G3-7D9E-6C1G-B4F3-5E0G6F7B8C9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0C4F5G3-7D9E-6C1G-B4F3-5E0G6F7B8C9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0C4F5G3-7D9E-6C1G-B4F3-5E0G6F7B8C9D}.Release|x64.ActiveCfg = Release|Any CPU
+		{D0C4F5G3-7D9E-6C1G-B4F3-5E0G6F7B8C9D}.Release|x64.Build.0 = Release|Any CPU
+		{D0C4F5G3-7D9E-6C1G-B4F3-5E0G6F7B8C9D}.Release|x86.ActiveCfg = Release|Any CPU
+		{D0C4F5G3-7D9E-6C1G-B4F3-5E0G6F7B8C9D}.Release|x86.Build.0 = Release|Any CPU
 		{A8F2D3E1-5B7C-4A9E-B2D1-3C8E9F4A6D2B}.Release|x64.ActiveCfg = Release|Any CPU
 		{A8F2D3E1-5B7C-4A9E-B2D1-3C8E9F4A6D2B}.Release|x64.Build.0 = Release|Any CPU
 		{A8F2D3E1-5B7C-4A9E-B2D1-3C8E9F4A6D2B}.Release|x86.ActiveCfg = Release|Any CPU
