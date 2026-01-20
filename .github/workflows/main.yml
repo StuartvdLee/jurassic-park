@@ -1,0 +1,71 @@
+name: Build Jurassic Park application
+
+run-name: Build Jurassic Park application
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  PUBLISH_DIR: ${{ github.workspace }}/publish
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3.4.2
+        with:
+          dotnet-version: 10.0
+
+      - name: Restore dependencies
+        working-directory: src
+        run: dotnet restore
+
+      - name: Build
+        working-directory: src
+        run: dotnet build --no-restore --configuration Release
+
+    #   - name: Run tests
+    #     working-directory: src
+    #     run: dotnet test --no-build --configuration Release --verbosity normal
+
+      - name: Publish API
+        working-directory: src/JurassicPark.Api
+        if: ${{ github.event_name != 'pull_request' }}
+        run: |
+          dotnet publish ./JurassicPark.Api.csproj \
+            --configuration Release \
+            --output ${{ env.PUBLISH_DIR }}/api
+          # Zip what App Service expects (folder content)
+          cd ${{ env.PUBLISH_DIR }}/api && zip -r jurassicpark.api.zip . && cd -
+      - name: Publish remote MCP server
+        working-directory: src/JurassicPark.Mcp.Remote
+        if: ${{ github.event_name != 'pull_request' }}
+        run: |
+          dotnet publish ./JurassicPark.Mcp.Remote.csproj \
+            --configuration Release \
+            --output ${{ env.PUBLISH_DIR }}/mcp
+          # Zip what App Service expects (folder content)
+          cd ${{ env.PUBLISH_DIR }}/mcp && zip -r jurassicpark.mcp.zip . && cd -
+      - name: Upload API artifact
+        if: ${{ github.event_name != 'pull_request' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: jurassicpark-api-artifact
+          path: ${{ env.PUBLISH_DIR }}/api/jurassicpark.api.zip
+
+      - name: Upload remote MCP server artifact
+        if: ${{ github.event_name != 'pull_request' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: jurassicpark-mcp-artifact
+          path: ${{ env.PUBLISH_DIR }}/mcp/jurassicpark.mcp.zip
