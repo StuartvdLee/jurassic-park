@@ -1,4 +1,7 @@
+using System.Text.Json.Serialization;
 using JurassicPark.Api.Features;
+using JurassicPark.Shared.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
