@@ -1,0 +1,15 @@
+meta {
+  name: GetDinosaurSpecies
+  type: http
+  seq: 3
+}
+
+get {
+  url: https://jurassicpark-api.azurewebsites.net/dinosaurspecies
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}
