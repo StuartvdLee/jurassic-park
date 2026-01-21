@@ -2,8 +2,13 @@
 -- based on the jurassic park and jurassic world franchise
 
 -- drop existing schema if it exists
+-- Reduce chatter so the GitHub Action doesn't treat NOTICE as an error
+SET client_min_messages = WARNING;
+
 DROP SCHEMA IF EXISTS jurassic_park CASCADE;
 CREATE SCHEMA jurassic_park;
+
+SET client_min_messages = NOTICE;
 
 SET search_path TO jurassic_park;
 
