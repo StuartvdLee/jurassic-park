@@ -1,1 +1,1 @@
-CREATE DATABASE jurassic_park;
+CREATE DATABASE IF NOT EXISTS jurassic_park;
