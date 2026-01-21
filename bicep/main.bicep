@@ -23,7 +23,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2024-11-01' = {
   location: location
   kind: 'linux'
   sku: {
-    name: 'F1' // Free tier
+    name: 'B1' // Free tier
   }
   properties: {
     reserved: true // For Linux
