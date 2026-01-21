@@ -76,11 +76,11 @@ jobs:
       with:
         server-name: jurassicpark.postgres.database.azure.com
         connection-string: ${{ secrets.POSTGRES_CONNECTION_STRING}}
-        plsql-file: database/PostgreSQL/00_jurassic_park_create.sql
+        plsql-file: database/00_jurassic_park_create.sql
 
     - name: Populate database
       uses: Azure/postgresql@v1.2.0
       with:
         server-name: jurassicpark.postgres.database.azure.com
         connection-string: ${{ secrets.POSTGRES_CONNECTION_STRING_JURASSICPARK}}
-        plsql-file: database/PostgreSQL/Bootstrap/*.sql
+        plsql-file: database/Bootstrap/*.sql
