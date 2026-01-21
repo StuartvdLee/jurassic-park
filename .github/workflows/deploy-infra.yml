@@ -32,7 +32,7 @@ jobs:
 
       - name: Check and create resource group if it doesn't exist
         run: |
-          LOCATION="westeurope"
+          LOCATION="northeurope"
 
           if az group show --name $resourceGroupName &>/dev/null; then
             echo "Resource group '$resourceGroupName' already exists."
