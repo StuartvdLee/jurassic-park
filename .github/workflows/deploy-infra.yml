@@ -1,0 +1,86 @@
+name: Deploy Jurassic Park infrastructure
+
+run-name: Deploy Jurassic Park infrastructure
+
+on:
+  workflow_dispatch:
+
+env:
+  resourceGroupName: jurassicpark-rg
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  DeployInfra:
+    name: Deploy infra
+    runs-on: ubuntu-latest
+    environment: Dev
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Azure login
+        uses: Azure/login@v2.3.0
+        with:
+          client-id: ${{ secrets.CLIENT_ID }}
+          tenant-id: ${{ secrets.TENANT_ID }}
+          subscription-id: ${{ secrets.SUBSCRIPTION_ID }}
+
+      - name: Check and create resource group if it doesn't exist
+        run: |
+          LOCATION="westeurope"
+
+          if az group show --name $resourceGroupName &>/dev/null; then
+            echo "Resource group '$resourceGroupName' already exists."
+          else
+            echo "Creating resource group '$resourceGroupName' in $LOCATION..."
+            az group create --name $resourceGroupName --location $LOCATION
+          fi
+
+      - name: Deploy infra
+        working-directory: bicep
+        run: |
+          az deployment group create \
+          --resource-group $resourceGroupName \
+          --template-file main.bicep \
+          --parameters \
+            postgresqlAdministratorLogin='${{ secrets.POSTGRES_ADMIN_USER }}' \
+            postgresqlAdministratorLoginPassword='${{ secrets.POSTGRES_ADMIN_PASSWORD }}' \
+            postgresqlJurassicParkConnectionString='${{ secrets.POSTGRES_CONNECTION_STRING_JURASSICPARK }}'
+
+  DeployDatabase:
+    name: Deploy database
+    runs-on: ubuntu-latest
+    environment: Dev
+    timeout-minutes: 10
+    needs: DeployInfra
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v5
+
+    - name: Azure login
+      uses: Azure/login@v2.3.0
+      with:
+        client-id: ${{ secrets.CLIENT_ID }}
+        tenant-id: ${{ secrets.TENANT_ID }}
+        subscription-id: ${{ secrets.SUBSCRIPTION_ID }}
+
+    # Create and populate are split up because we need to switch database after creation
+    - name: Create database
+      uses: Azure/postgresql@v1.2.0
+      with:
+        server-name: jurassicpark.postgres.database.azure.com
+        connection-string: ${{ secrets.POSTGRES_CONNECTION_STRING}}
+        plsql-file: database/PostgreSQL/00_jurassic_park_create.sql
+
+    - name: Populate database
+      uses: Azure/postgresql@v1.2.0
+      with:
+        server-name: jurassicpark.postgres.database.azure.com
+        connection-string: ${{ secrets.POSTGRES_CONNECTION_STRING_JURASSICPARK}}
+        plsql-file: database/PostgreSQL/Bootstrap/*.sql
