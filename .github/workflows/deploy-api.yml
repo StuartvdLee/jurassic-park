@@ -1,0 +1,41 @@
+name: Deploy Jurassic Park API
+
+run-name: Deploy Jurassic Park API
+
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+  actions: read
+
+jobs:
+  DeployApi:
+    name: Deploy API
+    runs-on: ubuntu-latest
+    environment: Dev
+    timeout-minutes: 5
+
+    steps:
+      - name: Download Jurassic Park API artifact
+        uses: dawidd6/action-download-artifact@v6
+        with:
+          workflow: build.yml
+          branch: main
+          workflow_conclusion: success
+          path: artifact
+          name: jurassicpark-api-artifact
+
+      - name: Azure login
+        uses: Azure/login@v2.3.0
+        with:
+          client-id: ${{ secrets.CLIENT_ID }}
+          tenant-id: ${{ secrets.TENANT_ID }}
+          subscription-id: ${{ secrets.SUBSCRIPTION_ID }}
+
+      - name: Deploy API
+        uses: Azure/webapps-deploy@v3.0.6
+        with:
+          app-name: jurassicpark-api
+          package: artifact/jurassicpark.api.zip
