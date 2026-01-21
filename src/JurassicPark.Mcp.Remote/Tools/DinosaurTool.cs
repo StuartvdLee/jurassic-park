@@ -14,7 +14,7 @@ public class DinosaurTool(HttpClient httpClient)
     [Description("Retrieves a list of dinosaurs. Optionally takes a limit of the number of dinosaurs to return.")]
     public async Task<List<Dinosaur>> GetDinosaursAsync(int? limit = null)
     {
-        var response = await _httpClient.GetAsync("https://jurassicpark-api.azurewebsites.net/employees");
+        var response = await _httpClient.GetAsync("https://jurassicpark-api.azurewebsites.net/dinosaurs");
         response.EnsureSuccessStatusCode();
 
         var json = await response.Content.ReadAsStringAsync();
