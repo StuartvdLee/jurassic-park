@@ -18,6 +18,56 @@ param postgresqlJurassicParkConnectionString string
 @description('Name of the application')
 param appName string = 'jurassicpark'
 
+resource appServicePlan 'Microsoft.Web/serverfarms@2024-11-01' = {
+  name: '${appName}-asp'
+  location: location
+  kind: 'linux'
+  sku: {
+    name: 'F1' // Free tier
+  }
+  properties: {
+    reserved: true // For Linux
+  }
+}
+
+resource apiAppService 'Microsoft.Web/sites@2024-11-01' = {
+  name: '${appName}-api'
+  location: location
+  properties: {
+    serverFarmId: appServicePlan.id
+    clientAffinityEnabled: false
+    httpsOnly: true
+    publicNetworkAccess: 'Enabled'
+    siteConfig: {
+      linuxFxVersion: 'DOTNETCORE|9.0'
+      alwaysOn: false
+    }
+  }
+}
+
+resource mcpAppService 'Microsoft.Web/sites@2024-11-01' = {
+  name: '${appName}-mcp'
+  location: location
+  properties: {
+    serverFarmId: appServicePlan.id
+    clientAffinityEnabled: false
+    httpsOnly: true
+    publicNetworkAccess: 'Enabled'
+    siteConfig: {
+      linuxFxVersion: 'DOTNETCORE|9.0'
+      alwaysOn: false
+    }
+  }
+}
+
+resource apiAppServiceAppSettings 'Microsoft.Web/sites/config@2024-11-01' = {
+  name: 'appsettings'
+  parent: apiAppService
+  properties: {
+    ConnectionStrings__DefaultConnection: postgresqlJurassicParkConnectionString
+  }
+}
+
 resource postgresqlServer 'Microsoft.DBforPostgreSQL/flexibleServers@2024-08-01' = {
   name: appName
   location: 'northeurope'

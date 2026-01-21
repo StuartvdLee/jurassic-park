@@ -1,0 +1,16 @@
+meta {
+  name: GetSingleDinosaurSpeciesLocal
+  type: http
+  seq: 2
+}
+
+get {
+  url: https://localhost:5000/dinosaurspecies/5
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
