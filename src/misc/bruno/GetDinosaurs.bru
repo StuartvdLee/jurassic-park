@@ -1,15 +1,16 @@
 meta {
-  name: GetDinosaurSpecies
+  name: GetDinosaurs
   type: http
   seq: 3
 }
 
 get {
-  url: https://jurassicpark-api.azurewebsites.net/dinosaurspecies
+  url: https://jurassicpark-api.azurewebsites.net/dinosaurs
   body: none
   auth: inherit
 }
 
 settings {
   encodeUrl: true
+  timeout: 0
 }
