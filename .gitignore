@@ -208,6 +208,7 @@ secrets.json
 # Cake
 tools/
 tools/packages.config
+!src/*/Tools/
 
 #############################
 # Logs
