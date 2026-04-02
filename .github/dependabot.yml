@@ -7,3 +7,14 @@ updates:
       day: "monday"
       time: "07:00"
       timezone: "Europe/Amsterdam"
+    groups:
+      mcp:
+        patterns:
+          - "ModelContextProtocol*"
+      efcore:
+        patterns:
+          - "Microsoft.EntityFrameworkCore*"
+          - "Npgsql.EntityFrameworkCore*"
+      microsoft-extensions:
+        patterns:
+          - "Microsoft.Extensions*"
